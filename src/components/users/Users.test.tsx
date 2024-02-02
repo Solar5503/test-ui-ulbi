@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios'
 import { MemoryRouter } from 'react-router-dom'
-import renderWithRouter from '../test/helpers/renderWithRouter'
+import renderWithRouter from '../../test/helpers/renderWithRouter'
 import Users from './Users'
 
 jest.mock('axios')
@@ -37,7 +37,7 @@ describe('Test Users', () => {
     jest.clearAllMocks()
   })
   test('render users', async () => {
-    (axios.get as jest.Mock).mockReturnValue(response)
+    ;(axios.get as jest.Mock).mockReturnValue(response)
     render(
       <MemoryRouter>
         <Users />
@@ -49,8 +49,8 @@ describe('Test Users', () => {
     screen.debug()
   })
   test('test redirect to details page', async () => {
-    const user = userEvent.setup();
-    (axios.get as jest.Mock).mockReturnValue(response)
+    const user = userEvent.setup()
+    ;(axios.get as jest.Mock).mockReturnValue(response)
     renderWithRouter(<Users />)
     const users = await screen.findAllByTestId('user-item')
     expect(users.length).toBe(3)
